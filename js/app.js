@@ -1,28 +1,28 @@
-const url ='https://api.giphy.com/v1/gifs/search';
+
+
+const url ='http://api.giphy.com/v1/gifs/search';
 let search ="?q=";
 const key ='&api_key=3CnHx35F9su7wf8w9XIl1euwIPlXYeSK';
 const limite = "&limit=20";
-
+const portfolio = document.getElementById("portfolio");
+const searchInput = document.getElementById('busqueda')
 
 let q =" ";
 let urlComplete =" ";
 
-
-
 const btn = document.getElementById('btn');
+console.log(btn)
 
-btn.onclick = () => {
-
-    const portafolio = document.getElementById("portfolio").innerHTML="";
-
-    q = document.getElementById('busqueda').value
+btn.addEventListener('click', () => {
+    q = searchInput.value
     urlComplete = url + search + q + key + limite
-    getData();
-}
+    getData(urlComplete);
+})
 
-const getData = async () => {
+async function getData (URL)  {
+    portfolio.innerHTML="";
 
-    await fetch(urlComplete).then((response)=>{
+    await fetch(URL).then((response)=>{
         return response.json();
     }).then((giphy) =>{
         console.log(giphy);
